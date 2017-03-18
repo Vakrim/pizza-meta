@@ -1,4 +1,5 @@
-import ingredients from './ingredients/reducer';
+/* @flow */
+import ingredients from 'p/ingredients/reducer';
 
 import { combineReducers } from 'redux';
 

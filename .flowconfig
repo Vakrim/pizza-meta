@@ -1,0 +1,14 @@
+[ignore]
+.*/node_modules/.*
+
+[include]
+
+[libs]
+flow-typed
+
+[options]
+module.name_mapper='^src\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+module.name_mapper='^p\/\(.*\)$' -> '<PROJECT_ROOT>/src/p/\1'
+module.name_mapper='^config\/\(.*\)$' -> '<PROJECT_ROOT>/config/\1'
+module.name_mapper='^images\/\(.*\)$' -> '<PROJECT_ROOT>/images/\1'
+module.name_mapper='^lib\/\(.*\)$' -> '<PROJECT_ROOT>/src/lib/\1'
