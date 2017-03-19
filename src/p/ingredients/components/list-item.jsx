@@ -3,11 +3,22 @@ import React from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
 
-class Ingredient extends React.Component {
+type Props = {
+  ingredient: VotedIngredient,
+  handleVote: Function,
+  minVote: number,
+  maxVote: number,
+};
+
+export default class IngredientItem extends React.Component {
+  props: Props;
+
   render() {
     const {
-      ingredient,
-      vote,
+      ingredient: {
+        ingredient,
+        vote,
+      },
       handleVote,
       minVote,
       maxVote,
@@ -73,5 +84,3 @@ const VoteButton = styled.div`
     color: #eee;
   }
 `;
-
-export default Ingredient;

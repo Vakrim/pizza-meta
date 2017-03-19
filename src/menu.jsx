@@ -1,7 +1,7 @@
 /* @flow */
 import _ from 'lodash';
 
-const menu = [
+const menu: Array<MenuItem> = [
   { name: 'Guma Orbit GRATIS!', desc: '' },
   {
     name: '61. Skrzydełka z kurczaka',
@@ -339,16 +339,19 @@ const menu = [
   { name: 'Kropla Beskidu jabłkowa', desc: '' },
 ];
 
-function getIngredientsFromDescription(desc) {
+function getIngredientsFromDescription(desc: string): Array<string> {
   return desc
     .split(/(?:\,|\.|\!|Nowość|Ciasto)/g)
     .map(i => i.trim())
     .filter(i => i.length);
 }
 
-const pizzasWithStringIngridients = _.chain(menu)
+const pizzasWithStringIngridients: Array<{
+  name: string,
+  ingredients: Array<string>,
+}> = _.chain(menu)
   .filter(
-    item => _.includes(item.desc, 'Ciasto') && !_.includes(item.name, 'Junior'),
+    item => _.includes(item.desc, 'Ciasto') && !_.includes(item.name, 'Junior')
   )
   .map(({ name, desc }) => ({
     name,
@@ -356,7 +359,7 @@ const pizzasWithStringIngridients = _.chain(menu)
   }))
   .value();
 
-const ingredients = _.chain(pizzasWithStringIngridients)
+const ingredients: Array<Ingredient> = _.chain(pizzasWithStringIngridients)
   .map(pizza => pizza.ingredients)
   .flatten()
   .sortBy()
@@ -364,9 +367,11 @@ const ingredients = _.chain(pizzasWithStringIngridients)
   .map(ingredient => ({ name: ingredient }))
   .value();
 
-const pizzas = pizzasWithStringIngridients.map(pizza => ({
-  name: pizza.name,
-  ingredients: pizza.ingredients.map(i => _.find(ingredients, { name: i })),
-}));
+const pizzas: Array<Pizza> = pizzasWithStringIngridients.map(pizza => {
+  return {
+    name: pizza.name,
+    ingredients: pizza.ingredients.map(i => _.find(ingredients, { name: i })),
+  };
+});
 
 export { pizzas, ingredients };

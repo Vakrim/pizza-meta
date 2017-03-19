@@ -2,20 +2,22 @@
 import { connect } from 'react-redux';
 import List from '../components/list';
 import { bindActionCreators } from 'redux';
-import actions from '../actions';
+import * as actions from '../actions';
 
-const mapStateToProps = state => {
+import type { Dispatch, Store } from 'redux';
+
+const mapStateToProps = (state: State) => {
   return {
     ingredients: state.ingredients,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch<*>) => {
   return bindActionCreators(
     {
-      handleVote: actions.creators.voteIngredient,
+      handleVote: actions.voteIngredient,
     },
-    dispatch,
+    dispatch
   );
 };
 

@@ -1,10 +1,11 @@
 [ignore]
-.*/node_modules/.*
 
 [include]
 
 [libs]
 flow-typed
+./src/types.js
+./src/actions.js
 
 [options]
 module.name_mapper='^src\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'

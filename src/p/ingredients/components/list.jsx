@@ -1,14 +1,26 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import Ingredient from './list-item';
+import IngredientItem from './list-item';
+
+type Props = {
+  ingredients: {
+    list: Array<VotedIngredient>,
+    minVote: number,
+    maxVote: number,
+  },
+  handleVote: Function,
+};
 
 class IndgredientsList extends React.Component {
+  props: Props;
+
   render() {
     const {
       ingredients: {
         list,
-        ...rest
+        maxVote,
+        minVote,
       },
       handleVote,
     } = this.props;
@@ -16,7 +28,13 @@ class IndgredientsList extends React.Component {
     return (
       <div>
         {list.map(i => (
-          <Ingredient key={i.name} handleVote={handleVote} {...i} {...rest} />
+          <IngredientItem
+            ingredient={i}
+            key={i.ingredient.name}
+            handleVote={handleVote}
+            maxVote={maxVote}
+            minVote={minVote}
+          />
         ))}
       </div>
     );

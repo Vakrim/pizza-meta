@@ -1,6 +1,9 @@
 /* @flow */
-import makeActionCreators from 'lib/action-creator';
-
-export default makeActionCreators({
-  VOTE_INGREDIENT: ['ingredient', 'vote'],
+export const voteIngredient = (
+  ingredient: Ingredient,
+  vote: number
+): VotedIngredientAction => ({
+  type: 'VOTE_INGREDIENT',
+  ingredient,
+  vote,
 });

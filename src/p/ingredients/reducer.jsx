@@ -1,8 +1,8 @@
 /* @flow */
 import { ingredients } from 'src/menu';
-import actions from './actions';
+import _ from 'lodash';
 
-const initialState = {
+const initialState: IngredientsState = {
   list: ingredients.map(i => ({
     ingredient: i,
     vote: 5,
@@ -11,8 +11,8 @@ const initialState = {
   maxVote: 10,
 };
 
-function calculateList(oldList, action) {
-  const list = oldList.map(({ ingredient, vote }) => ({
+function calculateList(state, action: VotedIngredientAction) {
+  const list = state.list.map(({ ingredient, vote }) => ({
     ingredient,
     vote: action.ingredient == ingredient ? action.vote : vote,
   }));
@@ -26,12 +26,15 @@ function calculateList(oldList, action) {
   };
 }
 
-export default (state = initialState, action) => {
+export default (
+  state: IngredientsState = initialState,
+  action: Action
+): IngredientsState => {
   switch (action.type) {
-    case actions.types.VOTE_INGREDIENT:
+    case 'VOTE_INGREDIENT':
       return {
         ...state,
-        ...calculateList(state.list, action),
+        ...calculateList(state, action),
       };
     default:
       return state;
