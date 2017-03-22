@@ -19,12 +19,22 @@ declare type Pizza = {
   ingredients: Array<Ingredient>,
 };
 
+declare type RatedPizza = {
+  pizza: Pizza,
+  rate: number,
+};
+
 declare type IngredientsState = {
-  list: Array<{ ingredient: Ingredient, vote: number }>,
+  list: Array<VotedIngredient>,
   minVote: number,
   maxVote: number,
 };
 
+declare type PizzasState = {
+  list: Array<RatedPizza>,
+};
+
 declare type State = {
   ingredients: IngredientsState,
+  pizzas: PizzasState,
 };
